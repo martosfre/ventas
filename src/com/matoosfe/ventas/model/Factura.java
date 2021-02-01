@@ -5,6 +5,7 @@ package com.matoosfe.ventas.model;
 
 import java.math.*;
 import java.time.*;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -42,6 +43,9 @@ public class Factura {
 	@Required
 	@Stereotype("DINERO")
 	private BigDecimal total;
+	@ElementCollection
+	@ListProperties("producto.codigo, producto.nombre, producto.precio, cantidad, subtotal, iva, total")
+	private List<DetalleFactura> detalles;
 
 	public Factura() {
 		// TODO Auto-generated constructor stub
@@ -143,6 +147,20 @@ public class Factura {
 	 */
 	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	/**
+	 * @return the detalles
+	 */
+	public List<DetalleFactura> getDetalles() {
+		return detalles;
+	}
+
+	/**
+	 * @param detalles the detalles to set
+	 */
+	public void setDetalles(List<DetalleFactura> detalles) {
+		this.detalles = detalles;
 	}
 
 }
